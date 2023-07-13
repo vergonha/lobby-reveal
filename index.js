@@ -77,6 +77,10 @@ async function updateLobbyState(message) {
             names.push(player.name)
         }
 
+        // Display nicknames in chat textbox :)
+        const box = document.querySelector("div.pregame-chat-box.visible > lol-social-chat-room > div > lol-social-chat-input > textarea")
+        box.value = names.join("\n")
+
         prettyPrint(names.join("\n"))
 
      }
