@@ -55,12 +55,12 @@ async function create(method, endpoint, action){
 
 async function observeQueue(callback) {
     const uri = document.querySelector('link[rel="riot:plugins:websocket"]').href
-	const ws = new WebSocket(uri, 'wamp')
+    const ws = new WebSocket(uri, 'wamp')
 
     const endpoint = "/lol-gameflow/v1/gameflow-phase".replaceAll("/", "_")
 
-	ws.onopen = () => ws.send(JSON.stringify([5, 'OnJsonApiEvent' + endpoint]))
-	ws.onmessage = callback
+    ws.onopen = () => ws.send(JSON.stringify([5, 'OnJsonApiEvent' + endpoint]))
+    ws.onmessage = callback
 }
 
 async function updateLobbyState(message) { 
