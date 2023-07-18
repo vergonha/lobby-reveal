@@ -1,5 +1,18 @@
 const delay = (t) => new Promise((r) => setTimeout(r, t))
 
+function generate_message_div(text) {
+    var mb = document.createElement("div");
+    mb.classList.add("message-box");
+    var sm = document.createElement("div");
+    sm.classList.add("system-message");
+    var span = document.createElement("span");
+    span.innerHTML = String(text);
+
+    sm.appendChild(span);
+    mb.appendChild(sm);
+    return mb;
+}
+
 function prettyPrint(names) { 
     console.clear()
     
@@ -77,11 +90,11 @@ async function updateLobbyState(message) {
             names.push(player.name)
         }
 
-        // Display nicknames in chat textbox :)
-        const box = document.querySelector("div.pregame-chat-box.visible > lol-social-chat-room > div > lol-social-chat-input > textarea")
-        box.value = names.join("\n")
-
         prettyPrint(names.join("\n"))
+
+        let cdoc = document.querySelector("div.pregame-chat-box.visible > lol-social-chat-room > div > iframe").contentDocument; // grab chatbox iframe
+        let messagebox = cdoc.querySelector("html > #embedded-messages-frame > .messages"); // grab messages div
+        messagebox.appendChild(generate_message_div(names)); // add all names to chat 
 
      }
 }
